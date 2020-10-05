@@ -1,0 +1,271 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://blird/blird.png" type="Texture" id=1]
+[ext_resource path="res://PlayerBlird.gd" type="Script" id=2]
+[ext_resource path="res://world/green.png" type="Texture" id=3]
+[ext_resource path="res://Prot.gd" type="Script" id=4]
+[ext_resource path="res://world/red.png" type="Texture" id=5]
+
+[sub_resource type="ProceduralSky" id=2]
+radiance_size = 0
+sky_top_color = Color( 0.129412, 0.913725, 0.141176, 1 )
+sky_horizon_color = Color( 0.337255, 1, 0.764706, 1 )
+sky_curve = 0.229421
+ground_bottom_color = Color( 0.0470588, 0.447059, 0, 1 )
+ground_horizon_color = Color( 0, 0.6, 0.0392157, 1 )
+ground_curve = 0.557153
+sun_color = Color( 0, 0, 0, 1 )
+sun_latitude = 20.0
+texture_size = 0
+
+[sub_resource type="Environment" id=3]
+background_mode = 2
+background_sky = SubResource( 2 )
+background_color = Color( 0.145098, 0.941176, 0.980392, 1 )
+background_energy = 0.6
+
+[sub_resource type="SphereShape" id=1]
+
+[sub_resource type="Animation" id=4]
+resource_name = "green_to_red"
+tracks/0/type = "value"
+tracks/0/path = NodePath("WorldEnvironment:environment:background_sky:sky_top_color")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.129412, 0.913725, 0.141176, 1 ), Color( 0.847059, 0.00784314, 0.00784314, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("WorldEnvironment:environment:background_sky:sky_horizon_color")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0.92549, 0.596078, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("WorldEnvironment:environment:background_sky:ground_bottom_color")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.0352941, 0.34902, 0, 1 ), Color( 0.929412, 0.67451, 0, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("WorldEnvironment:environment:background_sky:ground_horizon_color")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0.662745, 0.0431373, 1 ), Color( 0, 0, 0, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("WorldEnvironment:environment:background_sky:sun_color")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Map/Sprite3D:texture")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Map/Sprite3D2:texture")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Map/Sprite3D3:texture")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Map/Sprite3D4:texture")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Map/Sprite3D5:texture")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Map/Sprite3D6:texture")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Map/Sprite3D7:texture")
+tracks/11/interp = 2
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Map/Sprite3D8:texture")
+tracks/12/interp = 2
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Map/Sprite3D9:texture")
+tracks/13/interp = 2
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ), ExtResource( 5 ) ]
+}
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 4 )
+sky_top_color_red = Color( 0.886275, 0, 0, 1 )
+ground_bottom_color_red = Color( 0, 0.168627, 0, 1 )
+sky_top_color_green = Color( 0.223529, 0.92549, 0.286275, 1 )
+sky_horizon_color_green = Color( 0.184314, 1, 0.713726, 1 )
+ground_bottom_color_green = Color( 0, 0.164706, 0, 1 )
+ground_horizon_color_green = Color( 0.0509804, 0.666667, 0, 1 )
+sun_color_green = Color( 1, 1, 1, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 3 )
+
+[node name="Map" type="Spatial" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, 0, 0, 0 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D2" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, -400, 0, 0 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D3" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, -400, 0, 400 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D4" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, 0, 0, 400 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D5" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, 400, 0, 400 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D6" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, 400, 0, 0 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D7" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, 400, 0, -400 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D8" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, 0, 0, -400 )
+texture = ExtResource( 3 )
+
+[node name="Sprite3D9" type="Sprite3D" parent="Map"]
+transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, -400, 0, -400 )
+texture = ExtResource( 3 )
+
+[node name="KinematicBody" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+script = ExtResource( 2 )
+
+[node name="Sprite3D" type="Sprite3D" parent="KinematicBody"]
+alpha_cut = 2
+texture = ExtResource( 1 )
+vframes = 12
+hframes = 12
+
+[node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
+shape = SubResource( 1 )
+
+[node name="Camera" type="Camera" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+near = 0.01
+far = 500.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/green_to_red = SubResource( 4 )
+[connection signal="rotation_update" from="KinematicBody" to="." method="_on_KinematicBody_rotation_update"]
