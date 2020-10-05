@@ -6,7 +6,7 @@ signal rotation_update
 
 # Editor variables.
 export var speed := 60.0
-export var vertical_speed := 2.0
+export var vertical_speed := 8.0
 export var rotation_speed := 0.04
 export var rotation_mouse_threshold := Vector2(1.0, 1.0)
 

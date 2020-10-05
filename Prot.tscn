@@ -197,20 +197,14 @@ tracks/13/keys = {
 "values": [ ExtResource( 3 ), ExtResource( 5 ) ]
 }
 
-[node name="Spatial" type="Spatial"]
+[node name="World" type="Spatial"]
 script = ExtResource( 4 )
-sky_top_color_red = Color( 0.886275, 0, 0, 1 )
-ground_bottom_color_red = Color( 0, 0.168627, 0, 1 )
-sky_top_color_green = Color( 0.223529, 0.92549, 0.286275, 1 )
-sky_horizon_color_green = Color( 0.184314, 1, 0.713726, 1 )
-ground_bottom_color_green = Color( 0, 0.164706, 0, 1 )
-ground_horizon_color_green = Color( 0.0509804, 0.666667, 0, 1 )
-sun_color_green = Color( 1, 1, 1, 1 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
 [node name="Map" type="Spatial" parent="."]
+visible = false
 
 [node name="Sprite3D" type="Sprite3D" parent="Map"]
 transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, 0, 0, 0 )
@@ -249,7 +243,8 @@ transform = Transform( 10, 0, 0, 0, -1.62921e-06, -1, 0, 10, -1.62921e-07, -400,
 texture = ExtResource( 3 )
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
+collision_layer = 2147483649
 script = ExtResource( 2 )
 
 [node name="Sprite3D" type="Sprite3D" parent="KinematicBody"]
@@ -264,7 +259,7 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 near = 0.01
-far = 500.0
+far = 2000.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/green_to_red = SubResource( 4 )
