@@ -7,12 +7,13 @@ var noise
 var x
 var z
 var chunk_size
+var should_remove = true
 
-func _init(noise, x, z, chunk_size):
-	self.noise = noise
-	self.x = x * chunk_size
-	self.z = z * chunk_size
-	self.chunk_size = chunk_size
+func _init(init_noise, init_x, init_z, init_chunk_size):
+	self.noise = init_noise
+	self.x = init_x * init_chunk_size
+	self.z = init_z * init_chunk_size
+	self.chunk_size = init_chunk_size
 
 func _ready():
 	generate_chunk()
@@ -23,7 +24,7 @@ func generate_chunk():
 	plane_mesh.subdivide_depth = chunk_size * 0.5
 	plane_mesh.subdivide_width = chunk_size * 0.5
 	
-	# TODO give it a material
+	plane_mesh.material = load("res://world/terrain_material.tres")
 	
 	var surface_tool = SurfaceTool.new()
 	var data_tool = MeshDataTool.new()

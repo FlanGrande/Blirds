@@ -11,8 +11,8 @@ extends Spatial
 #export(Color) var ground_horizon_color_green : Color
 #export(Color) var sun_color_green : Color
 
-const chunk_size = 64
-const chunks_amount = 16
+export var chunk_size = 64
+export var chunks_amount = 8
 
 var noise
 var chunks = {}
@@ -81,12 +81,22 @@ func update_chunks():
 	for x in range(p_x - chunks_amount * 0.5, p_x + chunks_amount * 0.5):
 		for z in range(p_z - chunks_amount * 0.5, p_z + chunks_amount * 0.5):
 			add_chunk(x, z)
+			var chunk = get_chunk(x, z)
+			
+			if chunk != null:
+				chunk.should_remove = false
 
 func clean_up_chunks():
-	pass
+	for key in chunks:
+		var chunk = chunks[key]
+		
+		if chunk.should_remove:
+			chunk.queue_free()
+			chunks.erase(key)
 
 func reset_chunks():
-	pass
+	for key in chunks:
+		chunks[key].should_remove = true
 
 func _on_KinematicBody_rotation_update(normalized_rotation):
 	#update_sky_colors(normalized_rotation)
