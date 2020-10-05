@@ -4,25 +4,27 @@
 [ext_resource path="res://PlayerBlird.gd" type="Script" id=2]
 [ext_resource path="res://Prot.gd" type="Script" id=4]
 
-[sub_resource type="ProceduralSky" id=2]
+[sub_resource type="ProceduralSky" id=1]
 radiance_size = 0
 sky_top_color = Color( 0.129412, 0.913725, 0.141176, 1 )
 sky_horizon_color = Color( 0, 0.92549, 0.596078, 1 )
-sky_curve = 0.229421
+sky_curve = 0.917684
 ground_bottom_color = Color( 0.0352941, 0.34902, 0, 1 )
 ground_horizon_color = Color( 0, 0.662745, 0.0431373, 1 )
-ground_curve = 0.557153
+ground_curve = 0.171484
 sun_color = Color( 0, 0, 0, 1 )
 sun_latitude = 20.0
 texture_size = 0
 
-[sub_resource type="Environment" id=3]
+[sub_resource type="Environment" id=2]
 background_mode = 2
-background_sky = SubResource( 2 )
+background_sky = SubResource( 1 )
 background_color = Color( 0.145098, 0.941176, 0.980392, 1 )
-background_energy = 0.6
+ambient_light_color = Color( 1, 1, 1, 1 )
+ambient_light_energy = 0.1
+ambient_light_sky_contribution = 0.0
 
-[sub_resource type="SphereShape" id=1]
+[sub_resource type="SphereShape" id=3]
 
 [sub_resource type="Animation" id=4]
 resource_name = "green_to_red"
@@ -86,17 +88,43 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("WorldEnvironment:environment:ambient_light_color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("WorldEnvironment:environment:ambient_light_energy")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.1, 0.6 ]
+}
 
 [node name="World" type="Spatial"]
 script = ExtResource( 4 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 3 )
+environment = SubResource( 2 )
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0 )
 collision_layer = 2147483649
 script = ExtResource( 2 )
+speed = 100.0
+vertical_speed = 16.0
 
 [node name="Sprite3D" type="Sprite3D" parent="KinematicBody"]
 alpha_cut = 2
@@ -105,7 +133,7 @@ vframes = 12
 hframes = 12
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )

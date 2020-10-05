@@ -18,8 +18,8 @@ uniform vec3 uv1_offset;
 uniform vec3 uv2_scale;
 uniform vec3 uv2_offset;
 
-uniform vec4 sand_color : hint_color = vec4(0.90, 0.93, 0.62, 1.0);
-uniform vec4 grass_color : hint_color = vec4(0.56, 1.0, 0.53, 1.0);
+uniform vec4 sand_color : hint_color = vec4(0.70, 0.73, 0.42, 1.0);
+uniform vec4 grass_color : hint_color = vec4(0.36, 1.0, 0.33, 1.0);
 
 varying flat vec3 out_color;
 
