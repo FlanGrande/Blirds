@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Chunk",
 "language": "GDScript",
 "path": "res://world/Chunk.gd"
+}, {
+"base": "Spatial",
+"class": "LODSpatial",
+"language": "GDScript",
+"path": "res://addons/lod_spatial.gd"
 } ]
 _global_script_class_icons={
-"Chunk": ""
+"Chunk": "",
+"LODSpatial": "res://addons/lod_spatial.svg"
 }
 
 [application]
@@ -31,6 +37,10 @@ settings/fps/force_fps=60
 [display]
 
 window/size/fullscreen=true
+
+[editor_plugins]
+
+enabled=PoolStringArray( "." )
 
 [importer_defaults]
 
@@ -80,8 +90,6 @@ threads/thread_model=2
 quality/reflections/texture_array_reflections=false
 quality/reflections/high_quality_ggx=false
 quality/reflections/irradiance_max_size=64
-quality/filters/use_nearest_mipmap_filter=true
-quality/subsurface_scattering/quality=2
 quality/reflections/atlas_size=1024
-quality/filters/msaa=4
+quality/filters/msaa=3
 environment/default_environment="res://default_env.tres"

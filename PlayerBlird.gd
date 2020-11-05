@@ -46,7 +46,6 @@ func _ready():
 func _process(delta):
 	handle_input()
 	handle_movement(delta)
-	handle_rotation(delta)
 	apply_movement(delta, true)
 	update_green_and_red_style()
 	apply_movement_feedback(delta)
@@ -79,17 +78,6 @@ func handle_movement(delta):
 	
 	if Input.is_action_pressed("spin_right"):
 		rotate_object_local(Vector3(0.0, 0.0, 1.0), -spin_speed * delta)
-
-func handle_rotation(delta):
-	target_position = $Sprite3D.translation
-	
-	#print(translation.angle_to(target_position))
-	#rotate_y(translation.angle_to(target_position)/200.0)
-	#rotate(translation, translation.angle_to(target_position))
-	#rotation_speed = lerp_angle(rotation_acceleration, -rotation_acceleration, mouse_position.x)
-	#rotation_speed = clamp(rotation_speed, min_rotation_speed, max_rotation_speed)
-	#rotation_speed *= delta
-	#rotate_y(rotation_speed)
 
 func apply_movement(delta : float, force := false):
 	if moving or force:

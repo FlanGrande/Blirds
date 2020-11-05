@@ -54,7 +54,7 @@ func load_chunk(args):
 	var x = int(args[1])
 	var z = int(args[2])
 	
-	var chunk = Chunk.new(noise, x, z, chunk_size, 1)
+	var chunk = Chunk.new(noise, x, z, chunk_size, 1) #max(abs(x), abs(z))
 	#print(str(x) + " " + str(z))
 	chunk.translation = Vector3(x * chunk_size, 0, z * chunk_size)
 	
@@ -80,6 +80,7 @@ func _process(delta):
 	prepare_chunks()
 	update_chunks()
 	clean_up_chunks()
+	#update_lod()
 	reset_chunks()
 	
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -94,7 +95,7 @@ func prepare_chunks():
 	priority_list.clear()
 	tmp_priority_list.clear()
 	
-	while(priority_list.size() + tmp_priority_list.size() < chunks_amount * chunk_size):
+	while(priority_list.size() * tmp_priority_list.size() < chunks_amount * chunk_size):
 		for x in range(p_x - chunks_amount * 0.5, p_x + chunks_amount * 0.5):
 			for z in range(p_z - chunks_amount * 0.5, p_z + chunks_amount * 0.5):
 				if(not second_half):
@@ -107,8 +108,8 @@ func prepare_chunks():
 	
 	priority_list.invert()
 	#tmp_priority_list.invert()
-	print(priority_list.size())
-	print(tmp_priority_list.size())
+	#print(priority_list.size())
+	#print(tmp_priority_list.size())
 	
 	#var i = 0
 	for item in tmp_priority_list:
@@ -127,7 +128,6 @@ func update_chunks():
 		
 		if chunk != null:
 			chunk.should_remove = false
-		
 
 func clean_up_chunks():
 	for key in chunks:
@@ -141,6 +141,27 @@ func clean_up_chunks():
 func reset_chunks():
 	for key in chunks:
 		chunks[key].should_remove = true
+
+func update_lod():
+	for key in chunks:
+		var chunk = chunks[key]
+		var chunk_translation = Vector3(chunk.x, 0.0, chunk.z)
+		var x = chunk.x / chunk_size
+		var z = chunk.z / chunk_size
+		var player_distance_to_chunk = player_translation.distance_to(chunk_translation)
+		
+#		if(x == -3 and z == -2):
+#			print("SPAWN CHUNK")
+#			print(chunk_translation)
+#			print(player_translation)
+#			print(player_translation.distance_to(chunk_translation))
+		
+		#print(player_translation.distance_to(chunk_translation))
+		if(player_distance_to_chunk > 200 and player_distance_to_chunk < 600):
+			if(chunk.lod > 1):
+				chunk.lod = chunk.lod - 1
+				chunk.should_remove = true
+				priority_list.push_back(Vector2(x, z))
 
 func _on_KinematicBody_rotation_update(normalized_rotation):
 	#update_sky_colors(normalized_rotation)

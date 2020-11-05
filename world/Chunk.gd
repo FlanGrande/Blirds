@@ -2,15 +2,15 @@ extends Spatial
 
 class_name Chunk
 
-var mesh_instance
+var mesh_instances = []
 var noise
-var lod # 0 highest detail. 0, 1, 2, ..., n
+var lod # 1 highest detail. 1, 2, 3, ..., n NOT ZERO
 var x
 var z
 var chunk_size
 var should_remove = true
 
-var data_tool
+var LODSpatial = Spatial.new()
 
 func _init(init_noise, init_x, init_z, init_chunk_size, init_lod):
 	self.noise = init_noise
@@ -20,52 +20,52 @@ func _init(init_noise, init_x, init_z, init_chunk_size, init_lod):
 	self.lod = init_lod
 
 func _ready():
+	LODSpatial = Spatial.new()
+	LODSpatial.set_script(load("res://addons/lod_spatial.gd"))
+	LODSpatial.lod_0_max_distance = 2000
+	LODSpatial.lod_1_max_distance = 3000
+	LODSpatial.lod_2_max_distance = 4000
+	add_child(LODSpatial)
 	generate_chunk()
 
-func _process(delta):
-	pass
-	#edit_mesh()
-
 func generate_chunk():
-	var plane_mesh = PlaneMesh.new()
-	plane_mesh.size = Vector2(chunk_size, chunk_size)
-	plane_mesh.subdivide_depth = chunk_size * 0.5
-	plane_mesh.subdivide_width = chunk_size * 0.5
+	var lod_levels = 3
 	
-	plane_mesh.material = load("res://world/terrain_material.tres")
-	
-	var surface_tool = SurfaceTool.new()
-	data_tool = MeshDataTool.new()
-	surface_tool.create_from(plane_mesh, 0)
-	var array_plane = surface_tool.commit()
-	var error = data_tool.create_from_surface(array_plane, 0)
-	
-	for i in range(data_tool.get_vertex_count()):
-		var vertex = data_tool.get_vertex(i)
+	for lod_i in range(lod_levels):
+		var polygons = chunk_size * 0.5
+		var plane_mesh = PlaneMesh.new()
+		plane_mesh.size = Vector2(chunk_size, chunk_size)
 		
-		vertex.y = noise.get_noise_3d(vertex.x + x, vertex.y, vertex.z + z) * 160
+		plane_mesh.subdivide_width = polygons / (lod_i + 8)
+		plane_mesh.subdivide_depth = polygons / (lod_i + 8)
 		
-		data_tool.set_vertex(i, vertex)
-	
-	for s in range(array_plane.get_surface_count()):
-		array_plane.surface_remove(s)
-	
-	data_tool.commit_to_surface(array_plane)
-	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	surface_tool.create_from(array_plane, 0)
-	surface_tool.generate_normals()
-	
-	mesh_instance = MeshInstance.new()
-	mesh_instance.mesh = surface_tool.commit()
-	#mesh_instance.create_trimesh_collision()
-	mesh_instance.cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF
-	add_child(mesh_instance)
-
-func edit_mesh():
-	for i in range(0, data_tool.get_vertex_count()):
-		var vertex = data_tool.get_vertex(i)
+		plane_mesh.material = load("res://world/terrain_material.tres")
 		
-		vertex.y = 0
-		print(data_tool)
-		data_tool.set_vertex(i, vertex)
-	data_tool.commit_to_surface(mesh_instance)
+		var surface_tool = SurfaceTool.new()
+		var data_tool = MeshDataTool.new()
+		surface_tool.create_from(plane_mesh, 0)
+		var array_plane = surface_tool.commit()
+		var error = data_tool.create_from_surface(array_plane, 0)
+		
+		for i in range(0, data_tool.get_vertex_count()):
+			var vertex = data_tool.get_vertex(i)
+			
+			vertex.y = noise.get_noise_3d(vertex.x + x, vertex.y, vertex.z + z) * 80
+			
+			data_tool.set_vertex(i, vertex)
+	
+		for s in range(array_plane.get_surface_count()):
+			array_plane.surface_remove(s)
+		
+		data_tool.commit_to_surface(array_plane)
+		surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+		surface_tool.create_from(array_plane, 0)
+		surface_tool.generate_normals()
+		
+		mesh_instances.append(MeshInstance.new())
+		mesh_instances[lod_i].mesh = surface_tool.commit()
+		#print(mesh_instances[lod_i].mesh)
+		#mesh_instance.create_trimesh_collision()
+		mesh_instances[lod_i].cast_shadow = GeometryInstance.SHADOW_CASTING_SETTING_OFF
+		mesh_instances[lod_i].name = "MeshInstance-lod" + str(lod_i)
+		LODSpatial.add_child(mesh_instances[lod_i])
