@@ -14,7 +14,7 @@ ground_horizon_color = Color( 0, 0.662745, 0.0431373, 1 )
 ground_curve = 0.171484
 sun_color = Color( 0, 0, 0, 1 )
 sun_latitude = 20.0
-texture_size = 0
+texture_size = 1
 
 [sub_resource type="Environment" id=2]
 background_mode = 2
@@ -115,16 +115,19 @@ tracks/6/keys = {
 
 [node name="World" type="Spatial"]
 script = ExtResource( 4 )
+chunks_amount = 16
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 40, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 60, 0 )
 collision_layer = 2147483649
 script = ExtResource( 2 )
-speed = 100.0
-vertical_speed = 16.0
+speed = 20.0
+vertical_speed = 128.0
+spin_speed = 0.6
+rotation_acceleration = 0.04
 
 [node name="Sprite3D" type="Sprite3D" parent="KinematicBody"]
 alpha_cut = 2
@@ -137,6 +140,7 @@ shape = SubResource( 3 )
 
 [node name="Camera" type="Camera" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+fov = 100.0
 near = 0.01
 far = 2000.0
 
