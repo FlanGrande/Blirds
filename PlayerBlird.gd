@@ -6,6 +6,10 @@ signal rotation_update
 
 # Editor variables.
 export var speed := 10.0
+export var acceleration := 1.2
+export var deceleration := 0.1
+export var min_speed := 10.0
+export var max_speed := 800.0
 export var spin_speed := 24.0
 export var rotation_acceleration := 0.01
 export var rotation_mouse_threshold := Vector2(0.0, 0.0)
@@ -67,14 +71,36 @@ func handle_movement(delta):
 	
 	if Input.is_action_pressed("spin_right"):
 		rotate_object_local(Vector3(0.0, 0.0, 1.0), -spin_speed * delta)
+	
+	
+	var forward = transform.basis.z
+	
+	print(forward)
+	print(Vector3.DOWN.dot(forward))
+	if(Vector3.DOWN.dot(forward) < 0.0):
+		speed += acceleration
+	else:
+		speed -= deceleration
+	
+	speed = clamp(speed, min_speed, max_speed)
+	print("SPEED")
+	print(speed)
+	
+	#if direction.dot(enemy.transform.basis.z) > 0:
+	#	enemy.im_watching_you(player)
+	
+	#print(rotation_degrees.y)
+	#if(rotation_degrees.y < 0):
+	#	speed += acceleration
 
 func apply_movement(delta : float, force := false):
+	#transform = transform.orthonormalized()
 	if moving or force:
 		translate_object_local(Vector3(0.0, 0.0, -speed * delta))
 
 func update_green_and_red_style():
 	var animation_player = get_parent().get_node("AnimationPlayer")
-	var green_direction = Vector3(0.0, 0.0, -1.0)
+	var green_direction = Vector3(0.0, 0.0, -1.0) # green mood
 	var normalized_rotation = current_speed.angle_to(green_direction)
 	normalized_rotation = rad2deg(normalized_rotation) / 360
 	emit_signal("rotation_update", normalized_rotation)
