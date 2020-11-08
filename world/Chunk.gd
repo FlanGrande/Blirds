@@ -36,10 +36,12 @@ func generate_chunk():
 		var plane_mesh = PlaneMesh.new()
 		plane_mesh.size = Vector2(chunk_size, chunk_size)
 		
-		plane_mesh.subdivide_width = polygons / (lod_i + 8)
-		plane_mesh.subdivide_depth = polygons / (lod_i + 8)
+		plane_mesh.subdivide_width = polygons / (lod_i + 4)
+		plane_mesh.subdivide_depth = polygons / (lod_i + 4)
 		
 		plane_mesh.material = load("res://world/terrain_material.tres")
+		#TO DO: make water flat.
+		#plane_mesh.material
 		
 		var surface_tool = SurfaceTool.new()
 		var data_tool = MeshDataTool.new()

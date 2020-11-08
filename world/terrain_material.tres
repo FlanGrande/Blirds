@@ -26,8 +26,14 @@ uniform vec3 uv1_offset;
 uniform vec3 uv2_scale;
 uniform vec3 uv2_offset;
 
+uniform vec4 water_color : hint_color = vec4(0.0, 0.0, 0.60, 1.0);
 uniform vec4 sand_color : hint_color = vec4(0.70, 0.73, 0.42, 1.0);
 uniform vec4 grass_color : hint_color = vec4(0.36, 1.0, 0.33, 1.0);
+uniform vec4 snow_color : hint_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float water_color_height = -400.0;
+uniform float sand_color_height = -20.0;
+uniform float grass_color_height = 100.0;
+uniform float snow_color_height = 400.0;
 
 varying flat vec3 out_color;
 
@@ -44,9 +50,23 @@ void vertex()
 	UV=UV*uv1_scale.xy+uv1_offset.xy;
 	out_color = vec3(sand_color.r, sand_color.g, sand_color.b);
 	
-	if(VERTEX.y > 1.0)
+	if(VERTEX.y < sand_color_height)
 	{
-		out_color = lerpColor(sand_color, grass_color, clamp((VERTEX.y - 1.0) / 3.0, 0.0, 1.0));
+		out_color = lerpColor(water_color, sand_color, clamp((VERTEX.y - 1.0) / 3.0, 0.0, 1.0));
+	}
+	else
+	{
+		if(VERTEX.y < grass_color_height)
+		{
+			out_color = lerpColor(sand_color, grass_color, clamp((VERTEX.y - 1.0) / 3.0, 0.0, 1.0));
+		}
+		else
+		{
+			if(VERTEX.y < snow_color_height)
+			{
+				out_color = lerpColor(grass_color, snow_color, clamp((VERTEX.y - 1.0) / 3.0, 0.0, 1.0));
+			}
+		}
 	}
 }
 
@@ -76,5 +96,11 @@ shader_param/uv1_scale = null
 shader_param/uv1_offset = null
 shader_param/uv2_scale = null
 shader_param/uv2_offset = null
+shader_param/water_color = Color( 0, 0.298039, 0.933333, 1 )
 shader_param/sand_color = Color( 0.9, 0.93, 0.62, 1 )
 shader_param/grass_color = Color( 0.56, 1, 0.53, 1 )
+shader_param/snow_color = Color( 1, 1, 1, 1 )
+shader_param/water_color_height = -400.0
+shader_param/sand_color_height = -20.0
+shader_param/grass_color_height = 20.0
+shader_param/snow_color_height = 50.0
