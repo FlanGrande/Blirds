@@ -149,7 +149,6 @@ transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 40, 
 collision_layer = 2147483649
 script = ExtResource( 2 )
 speed = 80.0
-vertical_speed = 128.0
 spin_speed = 0.6
 rotation_acceleration = 0.04
 
