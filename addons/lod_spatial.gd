@@ -29,7 +29,7 @@ var refresh_rate := 0.5
 # Positive values will decrease the detail level and improve performance.
 # Negative values will improve visual appearance at the cost of performance.
 # This can overridden by setting the project setting `lod/bias`.
-var lod_bias := 3.0
+var lod_bias := 2.0
 
 # The internal refresh timer.
 var timer := 0.0

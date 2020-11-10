@@ -6,15 +6,17 @@ var mesh_instances = []
 var noise
 var lod # 1 highest detail. 1, 2, 3, ..., n NOT ZERO
 var x
+var y
 var z
 var chunk_size
 var should_remove = true
 
 var LODSpatial = Spatial.new()
 
-func _init(init_noise, init_x, init_z, init_chunk_size, init_lod):
+func _init(init_noise, init_x, offset_y, init_z, init_chunk_size, init_lod):
 	self.noise = init_noise
 	self.x = init_x * init_chunk_size
+	self.y = offset_y
 	self.z = init_z * init_chunk_size
 	self.chunk_size = init_chunk_size
 	self.lod = init_lod
@@ -36,8 +38,8 @@ func generate_chunk():
 		var plane_mesh = PlaneMesh.new()
 		plane_mesh.size = Vector2(chunk_size, chunk_size)
 		
-		plane_mesh.subdivide_width = polygons / (lod_i + 4)
-		plane_mesh.subdivide_depth = polygons / (lod_i + 4)
+		plane_mesh.subdivide_width = polygons / (lod_i + 3)
+		plane_mesh.subdivide_depth = polygons / (lod_i + 3)
 		
 		plane_mesh.material = load("res://world/terrain_material.tres")
 		#TO DO: make water flat.
@@ -52,7 +54,7 @@ func generate_chunk():
 		for i in range(0, data_tool.get_vertex_count()):
 			var vertex = data_tool.get_vertex(i)
 			
-			vertex.y = noise.get_noise_3d(vertex.x + x, vertex.y, vertex.z + z) * 80
+			vertex.y = noise.get_noise_3d(vertex.x + x, vertex.y, vertex.z + z) * 60 + y
 			
 			data_tool.set_vertex(i, vertex)
 	
@@ -61,6 +63,8 @@ func generate_chunk():
 		
 		data_tool.commit_to_surface(array_plane)
 		surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
+		#surface_tool.add_smooth_group(true)
+		#surface_tool.append_from(array_plane, 0, Transform.IDENTITY)
 		surface_tool.create_from(array_plane, 0)
 		surface_tool.generate_normals()
 		

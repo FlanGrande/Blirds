@@ -75,16 +75,16 @@ func handle_movement(delta):
 	
 	var forward = transform.basis.z
 	
-	print(forward)
-	print(Vector3.DOWN.dot(forward))
+	#print(forward)
+	#print(Vector3.DOWN.dot(forward))
 	if(Vector3.DOWN.dot(forward) < 0.0):
 		speed += acceleration
 	else:
 		speed -= deceleration
 	
 	speed = clamp(speed, min_speed, max_speed)
-	print("SPEED")
-	print(speed)
+	#print("SPEED")
+	#print(speed)
 	
 	#if direction.dot(enemy.transform.basis.z) > 0:
 	#	enemy.im_watching_you(player)

@@ -24,6 +24,8 @@ var thread
 var chunks_id_by_distance_is_sort = false
 var priority_list = []
 
+var radians_counter := 0.0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -52,9 +54,10 @@ func start_loading_chunk(x, z):
 func load_chunk(args):
 	var thread = args[0]
 	var x = int(args[1])
+	var offset_y = 100 #sin(radians_counter) #These values can be linked to some variable to create effects.
 	var z = int(args[2])
 	
-	var chunk = Chunk.new(noise, x, z, chunk_size, 1) #max(abs(x), abs(z))
+	var chunk = Chunk.new(noise, x, offset_y, z, chunk_size, 1) #max(abs(x), abs(z))
 	chunk.translation = Vector3(x * chunk_size, 0, z * chunk_size)
 	
 	call_deferred("load_done", chunk, thread)
@@ -83,6 +86,9 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
+	
+	radians_counter += 0.1
+	#if(radians_counter > 1.0): radians_counter = 0.0
 
 func prepare_chunks():
 	player_translation = $KinematicBody.translation
