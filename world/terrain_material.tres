@@ -1,14 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=2]
 
-[sub_resource type="SpatialMaterial" id=1]
-params_specular_mode = 3
-anisotropy_enabled = true
-anisotropy = 1.0
-distance_fade_mode = 3
-distance_fade_min_distance = 1024.0
-distance_fade_max_distance = 2048.0
+[ext_resource path="res://world/terrain_material.gd" type="Script" id=1]
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=1]
 code = "shader_type spatial;
 render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_lambert;
 uniform vec4 albedo : hint_color;
@@ -34,6 +28,7 @@ uniform float water_color_height = 0.0;
 uniform float sand_color_height = 6.0;
 uniform float grass_color_height = 40.0;
 uniform float snow_color_height = 80.0;
+uniform float color_offset = 0.0;
 
 varying flat vec3 out_color;
 
@@ -87,6 +82,8 @@ void vertex()
 			}
 		}
 	}
+	
+	out_color += color_offset;
 }
 
 void fragment()
@@ -102,8 +99,7 @@ void fragment()
 }"
 
 [resource]
-next_pass = SubResource( 1 )
-shader = SubResource( 2 )
+shader = SubResource( 1 )
 shader_param/albedo = null
 shader_param/specular = null
 shader_param/metallic = null
@@ -123,3 +119,5 @@ shader_param/water_color_height = 80.0
 shader_param/sand_color_height = 86.0
 shader_param/grass_color_height = 120.0
 shader_param/snow_color_height = 180.0
+shader_param/color_offset = 0.0
+script = ExtResource( 1 )

@@ -10,6 +10,7 @@ var y
 var z
 var chunk_size
 var should_remove = true
+var material_shader
 
 var LODSpatial = Spatial.new()
 
@@ -30,6 +31,9 @@ func _ready():
 	add_child(LODSpatial)
 	generate_chunk()
 
+func _process(delta):
+	pass
+
 func generate_chunk():
 	var lod_levels = 3
 	
@@ -41,7 +45,11 @@ func generate_chunk():
 		plane_mesh.subdivide_width = polygons / (lod_i + 3)
 		plane_mesh.subdivide_depth = polygons / (lod_i + 3)
 		
-		plane_mesh.material = load("res://world/terrain_material.tres")
+		#ShaderMaterial : material_shader2 = load("res://world/terrain_material.tres")
+		
+		
+		#plane_mesh.material = load("res://world/terrain_material.tres")
+		#plane_mesh.material.set_script(load("res://world/terrain_material.gd"))
 		#TO DO: make water flat.
 		#plane_mesh.material
 		
@@ -61,6 +69,9 @@ func generate_chunk():
 		for s in range(array_plane.get_surface_count()):
 			array_plane.surface_remove(s)
 		
+		var tmp_material = load("res://world/terrain_material.tres")
+		#print(tmp_material.get_script())
+		data_tool.set_material(tmp_material)
 		data_tool.commit_to_surface(array_plane)
 		surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 		#surface_tool.add_smooth_group(true)

@@ -1,0 +1,24 @@
+[remap]
+
+importer="texture_3d"
+type="Texture3D"
+path="res://.import/fog_texture2.png-71cf1a3d8c27eb5b334ef693341996da.tex3d"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://addons/silicon.vfx.volumetrics/textures/fog_texture2.png"
+dest_files=[ "res://.import/fog_texture2.png-71cf1a3d8c27eb5b334ef693341996da.tex3d" ]
+
+[params]
+
+compress/mode=0
+compress/no_bptc_if_rgb=false
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/srgb=2
+slices/horizontal=8
+slices/vertical=8

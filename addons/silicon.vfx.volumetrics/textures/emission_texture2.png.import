@@ -1,0 +1,24 @@
+[remap]
+
+importer="texture_3d"
+type="Texture3D"
+path="res://.import/emission_texture2.png-c73295c9d3fac5b0e9204ab22923c9e0.tex3d"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://addons/silicon.vfx.volumetrics/textures/emission_texture2.png"
+dest_files=[ "res://.import/emission_texture2.png-c73295c9d3fac5b0e9204ab22923c9e0.tex3d" ]
+
+[params]
+
+compress/mode=0
+compress/no_bptc_if_rgb=false
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/srgb=2
+slices/horizontal=8
+slices/vertical=8

@@ -9,17 +9,53 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Boid",
+"language": "GDScript",
+"path": "res://blird/BlirdBoid.gd"
+}, {
 "base": "Spatial",
 "class": "Chunk",
 "language": "GDScript",
 "path": "res://world/Chunk.gd"
 }, {
+"base": "Reference",
+"class": "FrustumAABBIntersection",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/utilities/frustum_aabb_intersection.gd"
+}, {
+"base": "Reference",
+"class": "Halton",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/utilities/halton.gd"
+}, {
 "base": "Spatial",
 "class": "LODSpatial",
 "language": "GDScript",
 "path": "res://addons/lod_spatial.gd"
+}, {
+"base": "Reference",
+"class": "Matrix4",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/utilities/matrix4.gd"
+}, {
+"base": "Node",
+"class": "SceneBounds",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/utilities/scene_bounds.gd"
+}, {
+"base": "ShaderMaterial",
+"class": "TransparentVolumeOverlay",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/material/transparent_volume_overlayer.gd"
+}, {
+"base": "Resource",
+"class": "VolumetricMaterial",
+"language": "GDScript",
+"path": "res://addons/silicon.vfx.volumetrics/material/volumetric_material.gd"
 } ]
 _global_script_class_icons={
+"Boid": "",
 "Chunk": "",
 "FrustumAABBIntersection": "",
 "Halton": "",
@@ -27,7 +63,7 @@ _global_script_class_icons={
 "Matrix4": "",
 "SceneBounds": "",
 "TransparentVolumeOverlay": "",
-"VolumetricMaterial": ""
+"VolumetricMaterial": "res://addons/silicon.vfx.volumetrics/material/volumetric_material.svg"
 }
 
 [application]
