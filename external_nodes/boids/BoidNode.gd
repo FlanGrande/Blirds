@@ -7,7 +7,7 @@ onready var boid_scene = preload("res://blird/BlirdBoid.tscn")
 var window_width = OS.get_window_size().x
 var window_height = OS.get_window_size().y
 
-const numBoids = 100
+const numBoids = 25
 const visualRange = 75
 
 var boids = []
@@ -85,7 +85,7 @@ func flyTowardsCenter(boid : Boid):
 # Move away from other boids that are too close to avoid colliding
 func avoidOthers(boid : Boid):
 	var boidPosition = Vector2(boid.x, boid.y)
-	var minDistance = 20 # The distance to stay away from other boids # CONST?
+	var minDistance = 80 # The distance to stay away from other boids # CONST?
 	var avoidFactor = 0.05 # Adjust velocity by this % # CONST?
 	var moveX = 0
 	var moveY = 0
