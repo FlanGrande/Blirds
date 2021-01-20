@@ -1,0 +1,19 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/ArrowPlaceholder.obj-dbb20a86125980f83cb8c86e445a3048.mesh"
+
+[deps]
+
+files=[ "res://.import/ArrowPlaceholder.obj-dbb20a86125980f83cb8c86e445a3048.mesh" ]
+
+source_file="res://blird/ArrowPlaceholder.obj"
+dest_files=[ "res://.import/ArrowPlaceholder.obj-dbb20a86125980f83cb8c86e445a3048.mesh", "res://.import/ArrowPlaceholder.obj-dbb20a86125980f83cb8c86e445a3048.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+optimize_mesh=true

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://world/terrain_material.tres" type="Material" id=1]
+[ext_resource path="res://world/models/bone1.glb" type="PackedScene" id=2]
+
+[node name="bone1" instance=ExtResource( 2 )]
+
+[node name="USNM220062_mt1_right_0" parent="." index="2"]
+material/0 = ExtResource( 1 )
