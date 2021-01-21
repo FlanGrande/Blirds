@@ -106,5 +106,5 @@ func update_green_and_red_style():
 	emit_signal("rotation_update", normalized_rotation)
 
 func apply_movement_feedback(delta):
-	current_sprite_position = Vector3(mouse_position.x, -mouse_position.y, 0.0)/200.0
+	current_sprite_position = Vector3(mouse_position.x, -mouse_position.y, 10.0)/200.0
 	$Sprite3D.translation = current_sprite_position

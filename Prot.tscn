@@ -9,11 +9,11 @@
 
 [sub_resource type="ProceduralSky" id=1]
 radiance_size = 0
-sky_top_color = Color( 0, 0, 0, 1 )
-sky_horizon_color = Color( 0, 0, 0, 1 )
+sky_top_color = Color( 1, 1, 1, 1 )
+sky_horizon_color = Color( 1, 1, 1, 1 )
 sky_curve = 0.545657
-ground_bottom_color = Color( 0, 0, 0, 1 )
-ground_horizon_color = Color( 0, 0, 0, 1 )
+ground_bottom_color = Color( 1, 1, 1, 1 )
+ground_horizon_color = Color( 1, 1, 1, 1 )
 ground_curve = 0.0336359
 sun_color = Color( 1, 0, 0, 1 )
 sun_latitude = 20.0
@@ -157,7 +157,7 @@ show_behind_parent = true
 script = ExtResource( 3 )
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
-transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 140, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 140, 0 )
 collision_layer = 2147483649
 script = ExtResource( 2 )
 speed = 80.0
@@ -188,8 +188,12 @@ far = 8192.0
 enabled = true
 cast_to = Vector3( 0, 0, -1 )
 
-[node name="Spatial" type="Spatial" parent="KinematicBody"]
+[node name="BlirdsNode3D" type="Spatial" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91494e-07, 0, 1.2932 )
 script = ExtResource( 6 )
+
+[node name="Position3D" type="Position3D" parent="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.83128 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/green = SubResource( 4 )

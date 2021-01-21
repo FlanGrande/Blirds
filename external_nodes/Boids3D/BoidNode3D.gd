@@ -8,8 +8,9 @@ var window_width = 24.0
 var window_height = 24.0
 var forward_depth = 16.0
 
-const numBoids = 20
-const visualRange = 20
+const numBoids = 48
+const visualRange = 1
+const mouseVisualRange = 20
 
 var boids = []
 
@@ -85,6 +86,13 @@ func flyTowardsCenter(boid : Boid3D):
 			centerZ += otherBoid.z
 			numNeighbors += 1
 	
+	var mousePosition = Vector3(boid.x + get_parent().mouse_position.x, boid.y + get_parent().mouse_position.y, boid.z - 10)
+	if(boidPosition.distance_to(mousePosition) < mouseVisualRange):
+		centerX += mousePosition.x
+		centerY += mousePosition.y
+		centerZ += mousePosition.z
+		numNeighbors += 1
+	
 	if(numNeighbors >= 0):
 		centerX = centerX / numNeighbors
 		centerY = centerY / numNeighbors
@@ -98,6 +106,7 @@ func flyTowardsCenter(boid : Boid3D):
 func avoidOthers(boid : Boid3D):
 	var boidPosition = Vector3(boid.x, boid.y, boid.z)
 	var minDistance = 4.0 # The distance to stay away from other boids # CONST?
+	var mouseMinDistance = 4.0 # The distance to stay away from other boids # CONST?
 	var avoidFactor = 0.05 # Adjust velocity by this % # CONST?
 	var moveX = 0
 	var moveY = 0
@@ -110,6 +119,12 @@ func avoidOthers(boid : Boid3D):
 				moveX += boid.x - otherBoid.x;
 				moveY += boid.y - otherBoid.y;
 				moveZ += boid.z - otherBoid.z;
+	
+	var mousePosition = Vector3(get_parent().mouse_position.x, get_parent().mouse_position.y, boid.z - 10)
+	if(boidPosition.distance_to(mousePosition) < mouseMinDistance):
+		moveX += boid.x - mousePosition.x;
+		moveY += boid.y - mousePosition.y;
+		moveZ += boid.z - mousePosition.z;
 	
 	boid.dx += moveX * avoidFactor
 	boid.dy += moveY * avoidFactor
@@ -146,7 +161,7 @@ func matchVelocity(boid : Boid3D):
 # Speed will naturally vary in flocking behavior, but real animals can't go
 # arbitrarily fast.
 func limitSpeed(boid : Boid3D):
-	var speedLimit = 1.0# CONST?
+	var speedLimit = 0.4# CONST?
 	var speed = pow(boid.dx * boid.dx + boid.dy * boid.dy + boid.dz * boid.dz, 1.0/3.0) # CONST?
 	
 	if(speed > speedLimit):
@@ -154,7 +169,8 @@ func limitSpeed(boid : Boid3D):
 		boid.dy = (boid.dy / speed) * speedLimit
 		boid.dz = (boid.dz / speed) * speedLimit
 
+# Place the boid in the world
 func drawBoid(boid : Boid3D):
-	boid.translation = Vector3(boid.x, boid.y, boid.z)
-	var target = Vector3(-boid.dx, -boid.dy, -boid.dz)*100.0 # This needs to take into account the player's speed.
+	var target = Vector3(-boid.dx, -boid.dy, -boid.dz)*100.0 # This needs to take into account the player's movement direction.
 	boid.look_at(target, Vector3.UP)
+	boid.translation = Vector3(boid.x, boid.y, boid.z)
